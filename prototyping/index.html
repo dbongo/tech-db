@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>HTML5 boilerplate – all you really need…</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <!--[if IE]>
+        <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <style>
+      body {
+        -webkit-font-smoothing: antialiased;
+        font: 1em/1.4 "Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+
+      .item {
+        line-height: 2.5rem;
+        border: 1px solid #999;
+        border-width: 1px 1px 1px 1px;
+      }
+
+      .item ~ .item {
+        border-width: 0px 1px 1px 1px;
+      }
+
+      .item .title {
+        font-weight: bold;
+      }
+
+      .item .description {
+        font-size: 1rem;
+      }
+
+      .item .category {
+        font-size: 1rem;
+      }
+
+      .item > div {
+        font-size: 1.2rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow:    ellipsis;
+      }
+
+      .search {
+        display:block;
+        line-height: 5.5rem;
+      }
+
+      .search input[type=text] {
+        font-size: 1.2rem;
+        padding:0.4rem;
+        border:1px solid #999;
+      }
+    </style>
+</head>
+
+<body>
+
+    <div class="row">
+      <div class="large-9 columns">
+        <h1>Technology Database</h1>
+      </div>
+      <div class="large-3 columns">
+        <form class="search">
+          <input type="text" />
+        </form>
+      </div>
+    </div>
+
+    <div class="row item">
+      <div class="large-2 columns title"><a href="#">Play! 2</a></div>
+      <div class="large-8 columns description">A Web Framework</div>
+      <div class="large-2 columns category">scala</div>
+    </div>
+
+    <div class="row item">
+      <div class="large-2 columns title"><a href="#">Play! 2</a></div>
+      <div class="large-8 columns description">A Web Framework</div>
+      <div class="large-2 columns category">java</div>
+    </div>
+
+
+    <div class="row item">
+      <div class="large-2 columns title"><a href="#">ElasticSearch</a></div>
+      <div class="large-8 columns description">A distributed restful search and analytics engine</div>
+      <div class="large-2 columns category">database</div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+@(hits: List[models.Technology])
+
+@main {
+        <a href="@routes.Application.viewAdd" class="button" id="new-technology">New Technology</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th></th>
+                </tr>
+            </thead>
+            @hits.map { technology =>
+               <tr>
+                   <td class="name">
+                       @technology.homePage.map { homePage =>
+                            <a href="@homePage">@technology.name</a>
+                       }.getOrElse {
+                            @technology.name
+                       }
+
+                   </td>
+                   <td>
+
+                       @technology.description
+                       <div class="tag-holder">
+                       <span class="tag status">
+                           @defining(technology.status.toLowerCase) { status =>
+                            <a href='@routes.Application.doStatus(status)'>@status</a>
+                           }
+                       </span>
+                           @technology.tags.map { tag =>
+                           <span class="tag">
+                               <a href='@routes.Application.doTag(tag)'>@tag</a>
+                           </span>
+                           }
+                       </div>
+                   </td>
+                   <td class="actions">
+                       <a href="@routes.Application.viewEdit(technology.id)" class="edit-link">⚙</a>
+                   </td>
+               </tr>
+            }
+        </table>
+}

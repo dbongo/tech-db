@@ -1,0 +1,31 @@
+@(id: String, tech: Form[models.Technology])
+
+@import helper._
+
+@main {
+
+    <header class="group">
+        <div class="full-width">
+            <h1>Edit Technology</h1>
+        </div>
+    </header>
+
+    @form(action = routes.Application.doEdit(id), 'id -> "add-form") {
+        @inputText(tech("name"), '_label -> "Name")
+        @inputText(tech("description"), '_label -> "Description")
+        @inputText(tech("homePage"), '_label -> "Home Page", 'type -> "url")
+        @inputText(tech("tags"), '_label -> Html("Tags <small style='font-weight:normal;'>(seperated by spaces)</small>"))
+        @select(tech("status"), options = options(models.Technology.statusOptions:_*), '_label -> "Status")
+        <input type="submit" value="&nbsp;&nbsp;&nbsp;Save Technology&nbsp;&nbsp;&nbsp;" class="button"/>
+        &nbsp;&nbsp;
+        <a href="@routes.Application.doDelete(id)" class="button red">&nbsp;&nbsp;&nbsp;Delete Technology&nbsp;&nbsp;&nbsp;</a>
+        <script type="text/javascript">
+            document.querySelector(".button.red").addEventListener("click", function(event){
+                if(!confirm("This will delete this technology for good.  We cool?")) {
+                    event.preventDefault()
+                    return false;
+                }
+            })
+        </script>
+    }
+}
