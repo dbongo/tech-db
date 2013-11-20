@@ -24,11 +24,13 @@
 
                        @technology.description
                        <div class="tag-holder">
-                       <span class="tag status">
+
                            @defining(technology.status.toLowerCase) { status =>
-                            <a href='@routes.Application.doStatus(status)'>@status</a>
+                            <span class="tag status @status">
+                                <a href='@routes.Application.doStatus(status)'>@status</a>
+                            </span>
                            }
-                       </span>
+
                            @technology.tags.map { tag =>
                            <span class="tag">
                                <a href='@routes.Application.doTag(tag)'>@tag</a>

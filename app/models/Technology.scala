@@ -30,9 +30,10 @@ object Technology {
   )
 
   val statusOptions = Seq(
-    "New"         -> "New",
-    "Incubating"  -> "Incubating",
-    "Recommended" -> "Recommended",
-    "Rejected"    -> "Rejected"
-  )
+    "New",
+    "Incubating",
+    "Recommended",
+    "Rejected",
+    "Deprecated").map(s => s -> s)
+
 }

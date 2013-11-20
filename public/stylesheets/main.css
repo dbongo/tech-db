@@ -2767,6 +2767,32 @@ span.tag.status a {
     background-color: #000;
 }
 
+span.tag.status.new a {
+    background-color: #f0f8fa;
+    border: 1px solid #16365C;
+    color:#16365C;
+}
+span.tag.status.incubating a {
+    background-color: #ffffcc;
+    border: 1px solid #E26B0A;
+    color:#E26B0A;
+}
+span.tag.status.recommended a {
+    background-color: #92d050;
+    color: #4F6228;
+    border: 1px solid #4F6228;
+
+}
+span.tag.status.rejected a {
+    background-color: #ff7c80;
+    border:1px solid #C00000;
+    color: #C00000;
+}
+span.tag.status.deprecated a {
+    background-color: #595959;
+    border:1px solid black;
+}
+
 div.tag-holder {
     float:right;
 }

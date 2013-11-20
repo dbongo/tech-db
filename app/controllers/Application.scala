@@ -7,8 +7,6 @@ import concurrent.ExecutionContext.Implicits.global
 import models.Technology
 import scala.concurrent.Future
 import com.sksamuel.elastic4s.source.ObjectSource
-import org.elasticsearch.action.get.GetResponse
-
 
 object Application extends Controller {
 
