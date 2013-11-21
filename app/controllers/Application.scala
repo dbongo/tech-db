@@ -93,5 +93,19 @@ object Application extends Controller {
       Ok(views.html.index(hits))
     }
   }
+
+  def viewView(id: String) = Action.async {
+
+    println(">>>> IN VIEWVIEW")
+
+    ES.client.get(id from "technologies/technology").map { response =>
+
+      response.sourceAs[Technology].map { technology =>
+        Ok(views.html.view(technology))
+      } getOrElse {
+        Redirect(routes.Application.doIndex)
+      }
+    }
+  }
 }
 

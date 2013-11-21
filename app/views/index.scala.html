@@ -2,6 +2,7 @@
 
 @main {
         <a href="@routes.Application.viewAdd" class="button" id="new-technology">New Technology</a>
+
         <table>
             <thead>
                 <tr>
@@ -13,16 +14,16 @@
             @hits.map { technology =>
                <tr>
                    <td class="name">
-                       @technology.homePage.map { homePage =>
-                            <a href="@homePage">@technology.name</a>
+
+                       @technology.homePage.map { page =>
+                        <a href="@page">@technology.name</a>
                        }.getOrElse {
-                            @technology.name
+                        @technology.name
                        }
+
 
                    </td>
                    <td>
-
-                       @technology.description
                        <div class="tag-holder">
 
                            @defining(technology.status.toLowerCase) { status =>
@@ -37,6 +38,8 @@
                            </span>
                            }
                        </div>
+                       <div style="white-space: nowrap;overflow:hidden;text-overflow: ellipsis;">@technology.description<div>
+
                    </td>
                    <td class="actions">
                        <a href="@routes.Application.viewEdit(technology.id)" class="edit-link">⚙</a>

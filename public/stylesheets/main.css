@@ -2797,6 +2797,10 @@ div.tag-holder {
     float:right;
 }
 
+div.tag-holder.view span a {
+    font-size:2rem!important;
+}
+
 #title {
     color: white;
     text-decoration: none;
@@ -2819,9 +2823,7 @@ dd.info, dd.error {
     display:none;
 }
 
-#add-form {
-    width: 40%;
-}
+
 
 
 #add-form input {
@@ -2849,6 +2851,8 @@ dd.info, dd.error {
     border:0;
     margin:0;
     text-decoration: none;
+    margin-left: 5px;
+    margin-right: 5px;
 
 }
 
@@ -2862,4 +2866,13 @@ td.name a {
 
 .button.red {
     background-color: #a20000;
+}
+
+div.technology-description p {
+    margin-top: 4rem!important;
+    font-size: 2.5rem!important;
+}
+
+h1.technology-name {
+    font-size:4rem;
 }
