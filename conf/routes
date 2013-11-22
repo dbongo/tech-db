@@ -12,6 +12,9 @@ GET     /edit/:id                   controllers.Application.viewEdit(id)
 POST    /edit/:id                   controllers.Application.doEdit(id)
 GET     /delete/:id                 controllers.Application.doDelete(id)
 GET     /status/:status             controllers.Application.doStatus(status)
+GET     /import                     controllers.Application.viewImport
+POST    /import                     controllers.Application.doImport
+GET     /export                     controllers.Application.doExport
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

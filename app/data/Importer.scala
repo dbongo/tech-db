@@ -2,7 +2,7 @@ package data
 
 import scala.util.parsing.combinator.RegexParsers
 import java.io.File
-import scala.io.Source
+import scala.io.{BufferedSource, Source}
 import models.Technology
 import tasks.ES
 import com.sksamuel.elastic4s.ElasticDsl._
@@ -14,25 +14,30 @@ import scala.concurrent.duration._
 
 object Exporter {
 
-  def performExport = {
-    val lines = ES.client.sync.execute(search in "technologies").resultsAs[Technology].map { technology =>
-      s"${technology.id},${technology.name},${technology.description},${technology.tags.mkString(" ")},${technology.homePage.getOrElse("")}, ${technology.status}"
+  def convert(technologies: List[Technology]) = {
+    val lines = technologies.map { technology =>
+      s"""${technology.id},${technology.name},"${technology.description}",${technology.tags.mkString(" ")},${technology.homePage.map("\"" + _ + "\"").getOrElse("")},${technology.status}"""
     }
 
     lines.mkString("\n")
   }
+
 }
 
 object Importer {
 
-  def performImport(file: File) = {
-    val source = Source.fromFile(file).getLines.mkString("\n")
-    val technologies = CSV.parse(source).map {
-      case List(a,b,c,d,e,f) => Technology(a,b,c,d.split(" "), if(e.isEmpty) None else Some(e),f)
-    }
-    val inserts = technologies.map(t => index into "technologies/technology" id t.id source ObjectSource(t))
+  def convert(file: File): List[Technology] = convert(Source.fromFile(file))
 
-    Await.ready(ES.client.bulk(inserts:_*), Duration.Inf)
+  def convert(input: Source): List[Technology] = convert(input.getLines.mkString("\n"))
+
+  def convert(input: String): List[Technology] = {
+    CSV.parse(input).flatMap {
+      case List(a,b,c,d,e,f) => Some(Technology(a,b,c,Seq(d.split(" "):_*), if(e.isEmpty) None else Some(e),f))
+      case theRest => {
+        println(s"For some reason we can't parse this: $theRest")
+        None
+      }
+    }
   }
 
   object CSV extends RegexParsers {

@@ -1,7 +1,10 @@
 @(hits: List[models.Technology])
 
 @main {
+        <span style="float:right;"><h1 style="line-height:6rem;">@hits.size listed</h1></span>
         <a href="@routes.Application.viewAdd" class="button" id="new-technology">New Technology</a>
+        <a href="@routes.Application.viewImport" class="button" id="import-technologies">Import CSV</a>
+        <a href="@routes.Application.doExport" class="button-secondary" id="export-technologies">Export CSV (All)</a>
 
         <table>
             <thead>
@@ -14,13 +17,13 @@
             @hits.map { technology =>
                <tr>
                    <td class="name">
-
+                       <div style="white-space: nowrap;overflow:hidden;text-overflow: ellipsis; max-width: 175px;">
                        @technology.homePage.map { page =>
                         <a href="@page">@technology.name</a>
                        }.getOrElse {
                         @technology.name
                        }
-
+                        </div>
 
                    </td>
                    <td>
@@ -38,7 +41,7 @@
                            </span>
                            }
                        </div>
-                       <div style="white-space: nowrap;overflow:hidden;text-overflow: ellipsis;">@technology.description<div>
+                       <div style="white-space: nowrap;overflow:hidden;text-overflow: ellipsis;; max-width:750px;">@technology.description<div>
 
                    </td>
                    <td class="actions">
