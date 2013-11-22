@@ -1,46 +1,49 @@
-1759023789-1385058858219,jerry,jQuery in Java. Jerry is a fast and concise Java Library that simplifies HTML document parsing traversing and manipulating. Jerry is designed to change the way that you parse HTML content.,java jvm,http://jodd.org/doc/jerry/,New
-1213693407-1385060213869,sqlite-jdbc,JDBC connector for connecting/creating SQLite databases,java jvm database sqlite jdbc,https://bitbucket.org/xerial/sqlite-jdbc,New
-1991144173-1385062052630,giter8,giter8 or g8 is a command line tool for applying templates,java scala templating,https://github.com/n8han/giter8,Recommended
-517062633-1385058335321,zt-zip,ZIP file library featuring iteration and extraction,compression jvm,https://github.com/zeroturnaround/zt-zip,New
-869578553-1385060785449,tape,Queue related classes like the FileBackedQueue class and simple thing like that,java jvm,http://square.github.io/tape/,New
-328920127-1385060603426,xstream,Super fast XML streaming and parsing.  Used by NASA in space FFS,java jvm xml,http://xstream.codehaus.org/,New
-1121085032-1385060106462,config,Configuration library,java jvm scala,https://github.com/typesafehub/config,New
-53136817-1385061583393,riot.js,Ultra small MVP framework,javascript,https://github.com/moot/riotjs,New
-2033740418-1385060381022,jline,Handle console and cli input,java jvm,http://jline.github.io/jline2/,New
-2016714239-1385058019821,javatuples,Java based Tuple implementation,java,http://www.javatuples.org/,New
-1613453925-1385062144452,dropwizard,"A damn simple library for building production-ready ops-friendl, RESTful web services.",jvm java web,https://github.com/dropwizard/dropwizard,Recommended
-960416566-1385062554449,memSQL,MemSQL is the highest performing in-memory database that accelerates applications provides real-time analytics and combines structured and semi-structured data into a consolidated Big Data solution. MemSQL empowers organizations to make data-driven decisions better engage customers and discover competitive advantages.,database persistence analytics,http://www.memsql.com/,New
-356468906-1385062763160,factorypal,A Scala framework for creating objects as test data.,scala testing,https://github.com/mgonto/factory_pal,Deprecated
-150581493-1385058185440,xbean-finder,Annotation finder (a bit like reflection).  Useful for plugins and such,java jvm,http://tomee.apache.org/dev/xbean-ﬁnder.html,New
-918177721-1385058217759,shrinkwrap-resolver,Java API to obtain artefacts from a repository system,java jvm,https://github.com/shrinkwrap/resolver,New
-79005397-1385058740961,jansi,Console Output ANSI support,java jvm,http://jansi.fusesource.org/index.html,New
-213220987-1385058996019,jodd,"Jodd is an open-source Java utility library and set of micro frameworks. Jodd tools enriches JDK with many powerful and feature rich utilities. It helps with everyday task makes code more robust and reliable. Jodd frameworks is set of lightweight application frameworks, compact yet powerful. Designed following the CoC, DRY and SCS principles, it makes development simple, but not simpler; you get 90% of the features with 10% of usual effort",java jvm,http://jodd.org/,New
-2124111609-1385060359702,zt-exec,Process executor from ZeroTurnaround,java jvm,https://github.com/zeroturnaround/zt-exec,New
-122689819-1385060744434,component-ness-pg,Embedded Postgres library useful for testing and whatnot,java jvm database testing,https://github.com/NessComputing/components-ness-pg,New
-865303208-1385060814407,vtte,Very Trivial Templating Engine,java jvm templating,https://github.com/hgschmie/vtte,New
-11493484-1385060461538,spark,Spark is a simple web framework for java,java jvm web-framework,http://www.sparkjava.com/,Incubating
-1135269009-1385062273013,squeryl,A Scala ORM and DSL for talking with Databases with minimum verbosity and maximum type safety,scala jvm database persistence,http://squeryl.org/,Incubating
-765941918-1385060532980,totallylazy,Lazy collection a la Clojure for Java,java jvm,https://code.google.com/p/totallylazy/,New
-944887141-1385061234485,jexmec,"Jexmec is a clean, simple, non-intrusive library supporting plugin based development on the Java platform.",java jvm,http://jexmec.org/,New
-115364331-1385061405669,dumbster,The Dumbster is a very simple fake SMTP server designed for unit and system testing applications that send email messages. It responds to all standard SMTP commands but does not deliver messages to the user.,java jvm email testing,http://quintanasoft.com/dumbster/,New
-1171057459-1385062424768,activate,Activate is a framework to persist objects in Scala. It is a STM (Software Transactional Memory) distributed and durable with pluggable persistence.,scala jvm database persistence,http://activate-framework.org/,Incubating
-1952086654-1385062476021,socko,An embedded Scala web server powered by Netty networking and Akka processing.,scala jvm web,http://sockoweb.org/,Incubating
-268896938-1385061104706,atmosphere,"Real Time Client Server Framework for the JVM, supporting WebSockets and Cross-Browser Fallbacks Support",java jvm scala websockets,http://async-io.org/,New
-1624247332-1385058285102,shavenmaven,Tiny dependency resolver.  Maven backed unmanaged lib downloader thingy,jvm build-tool java,https://code.google.com/p/shavenmaven/,New
-1395470408-1385058779419,feign,Makes writing HTTP clients easy.  Can bind client requests to object etc.,java jvm,https://github.com/Netflix/feign,New
-481395520-1385060265277,joda-money,Joda-Money provides a library of classes to store amounts of money or currency.,java jvm,http://www.joda.org/joda-money/,New
-226926477-1385058810489,retrofit,A type-safe REST client for Android and Java from Square,android java jvm,http://square.github.io/retrofit/,New
-1294143686-1385060171066,jackson-dataformat-yaml,YAML extension for Jackson,java jvm,https://github.com/FasterXML/jackson-dataformat-yaml,New
-901565294-1385060143057,unix4j,Unix commands for Java including grep and what not,java jvm,https://code.google.com/p/unix4j/,New
-1221728485-1385058512532,airline,Command line argument parser library,java jvm,https://github.com/airlift/airline,New
-96119446-1385060006351,jchronic,Natural date parsing,java jvm,https://github.com/samtingleff/jchronic,New
-974289217-1385060500690,sshj,SSH client for Java,java jvm,http://schmizz.net/sshj/,New
-1241494170-1385061354525,oboe.js,A fresh approach to JSON loading that speeds up web applications by providing the parsed objects before the response completes.,javascript json,https://github.com/jimhigson/oboe.js,New
-397147916-1385062362424,anorm,Play includes a simple data access layer called Anorm that uses plain SQL to interact with the database and provides an API to parse and transform the resulting datasets. Can be used without play as well but caveat emptor,scala database persistence,http://www.playframework.com/documentation/2.1-RC2/ScalaAnorm,Recommended
-264897391-1385058559189,really-executable-jars-maven-plugin,Maven plugin for making chmod +x jar files,maven build-tool,https://github.com/brianm/really-executable-jars-maven-plugin,New
-1329221995-1385060037832,assertj,Rich fluent assertion library,java jvm testing,https://github.com/joel-costigliola/assertj-core,New
-976473569-1385060320435,jbcrypt,"jBCrypt is a Java implementation of OpenBSD's Blowfish password hashing code, as described in A Future-Adaptable Password Scheme by Niels Provos and David Mazières.",java jvm encryption,http://www.mindrot.org/projects/jBCrypt/,New
-735386192-1385061049834,tower.js,"Small components for building apps, manipulating data, and automating a distributed infrastructure.",javascript,http://tower.github.io/,New
-636419418-1385061281471,finatra,Finatra is a sinatra clone for scala based on twitters finagle,scala jvm,http://finatra.info/,New
-588686623-1385061540263,ractive.js,Template based DOM manipulation,javascript templating,http://www.ractivejs.org/,New
-559423498-1385062230294,scala-migrations,Scala Migrations is a library to manage upgrades and rollbacks to database schemas.,jvm scala database persistence,https://code.google.com/p/scala-migrations/,Recommended
+1213693407-1385060213869,sqlite-jdbc,"JDBC connector for connecting/creating SQLite databases",java jvm database sqlite jdbc,"https://bitbucket.org/xerial/sqlite-jdbc",New
+1991144173-1385062052630,giter8,"giter8 or g8 is a command line tool for applying templates",java scala templating,"https://github.com/n8han/giter8",Recommended
+517062633-1385058335321,zt-zip,"ZIP file library featuring iteration and extraction",compression jvm,"https://github.com/zeroturnaround/zt-zip",New
+869578553-1385060785449,tape,"Queue related classes like the FileBackedQueue class and simple thing like that",java jvm,"http://square.github.io/tape/",New
+328920127-1385060603426,xstream,"Super fast XML streaming and parsing.  Used by NASA in space FFS",java jvm xml,"http://xstream.codehaus.org/",New
+1121085032-1385060106462,config,"Configuration library",java jvm scala,"https://github.com/typesafehub/config",New
+53136817-1385061583393,riot.js,"Ultra small MVP framework",javascript,"https://github.com/moot/riotjs",New
+2033740418-1385060381022,jline,"Handle console and cli input",java jvm,"http://jline.github.io/jline2/",New
+2016714239-1385058019821,javatuples,"Java based Tuple implementation",java,"http://www.javatuples.org/",New
+1613453925-1385062144452,dropwizard,"A damn simple library for building production-ready ops-friendl, RESTful web services.",jvm java web,"https://github.com/dropwizard/dropwizard",Recommended
+960416566-1385062554449,memSQL,"MemSQL is the highest performing in-memory database that accelerates applications provides real-time analytics and combines structured and semi-structured data into a consolidated Big Data solution. MemSQL empowers organizations to make data-driven decisions better engage customers and discover competitive advantages.",database persistence analytics,"http://www.memsql.com/",New
+356468906-1385062763160,factorypal,"A Scala framework for creating objects as test data.",scala testing,"https://github.com/mgonto/factory_pal",Deprecated
+1759023789-1385058858219,jerry,"jQuery in Java.
+
+Jerry is a fast and concise Java Library that simplifies HTML document parsing traversing and manipulating. Jerry is designed to change the way that you parse HTML content.",java jvm,"http://jodd.org/doc/jerry/",New
+150581493-1385058185440,xbean-finder,"Annotation finder (a bit like reflection).  Useful for plugins and such",java jvm,"http://tomee.apache.org/dev/xbean-ﬁnder.html",New
+918177721-1385058217759,shrinkwrap-resolver,"Java API to obtain artefacts from a repository system",java jvm,"https://github.com/shrinkwrap/resolver",New
+79005397-1385058740961,jansi,"Console Output ANSI support",java jvm,"http://jansi.fusesource.org/index.html",New
+213220987-1385058996019,jodd,"Jodd is an open-source Java utility library and set of micro frameworks. Jodd tools enriches JDK with many powerful and feature rich utilities. It helps with everyday task makes code more robust and reliable. Jodd frameworks is set of lightweight application frameworks, compact yet powerful. Designed following the CoC, DRY and SCS principles, it makes development simple, but not simpler; you get 90% of the features with 10% of usual effort",java jvm,"http://jodd.org/",New
+2124111609-1385060359702,zt-exec,"Process executor from ZeroTurnaround",java jvm,"https://github.com/zeroturnaround/zt-exec",New
+122689819-1385060744434,component-ness-pg,"Embedded Postgres library useful for testing and whatnot",java jvm database testing,"https://github.com/NessComputing/components-ness-pg",New
+865303208-1385060814407,vtte,"Very Trivial Templating Engine",java jvm templating,"https://github.com/hgschmie/vtte",New
+11493484-1385060461538,spark,"Spark is a simple web framework for java",java jvm web-framework,"http://www.sparkjava.com/",Incubating
+1135269009-1385062273013,squeryl,"A Scala ORM and DSL for talking with Databases with minimum verbosity and maximum type safety",scala jvm database persistence,"http://squeryl.org/",Incubating
+765941918-1385060532980,totallylazy,"Lazy collection a la Clojure for Java",java jvm,"https://code.google.com/p/totallylazy/",New
+944887141-1385061234485,jexmec,"Jexmec is a clean, simple, non-intrusive library supporting plugin based development on the Java platform.",java jvm,"http://jexmec.org/",New
+115364331-1385061405669,dumbster,"The Dumbster is a very simple fake SMTP server designed for unit and system testing applications that send email messages. It responds to all standard SMTP commands but does not deliver messages to the user.",java jvm email testing,"http://quintanasoft.com/dumbster/",New
+1171057459-1385062424768,activate,"Activate is a framework to persist objects in Scala. It is a STM (Software Transactional Memory) distributed and durable with pluggable persistence.",scala jvm database persistence,"http://activate-framework.org/",Incubating
+1952086654-1385062476021,socko,"An embedded Scala web server powered by Netty networking and Akka processing.",scala jvm web,"http://sockoweb.org/",Incubating
+268896938-1385061104706,atmosphere,"Real Time Client Server Framework for the JVM, supporting WebSockets and Cross-Browser Fallbacks Support",java jvm scala websockets,"http://async-io.org/",New
+1624247332-1385058285102,shavenmaven,"Tiny dependency resolver.  Maven backed unmanaged lib downloader thingy",jvm build-tool java,"https://code.google.com/p/shavenmaven/",New
+1395470408-1385058779419,feign,"Makes writing HTTP clients easy.  Can bind client requests to object etc.",java jvm,"https://github.com/Netflix/feign",New
+481395520-1385060265277,joda-money,"Joda-Money provides a library of classes to store amounts of money or currency.",java jvm,"http://www.joda.org/joda-money/",New
+226926477-1385058810489,retrofit,"A type-safe REST client for Android and Java from Square",android java jvm,"http://square.github.io/retrofit/",New
+1294143686-1385060171066,jackson-dataformat-yaml,"YAML extension for Jackson",java jvm,"https://github.com/FasterXML/jackson-dataformat-yaml",New
+901565294-1385060143057,unix4j,"Unix commands for Java including grep and what not",java jvm,"https://code.google.com/p/unix4j/",New
+1221728485-1385058512532,airline,"Command line argument parser library",java jvm,"https://github.com/airlift/airline",New
+96119446-1385060006351,jchronic,"Natural date parsing",java jvm,"https://github.com/samtingleff/jchronic",New
+974289217-1385060500690,sshj,"SSH client for Java",java jvm,"http://schmizz.net/sshj/",New
+1241494170-1385061354525,oboe.js,"A fresh approach to JSON loading that speeds up web applications by providing the parsed objects before the response completes.",javascript json,"https://github.com/jimhigson/oboe.js",New
+397147916-1385062362424,anorm,"Play includes a simple data access layer called Anorm that uses plain SQL to interact with the database and provides an API to parse and transform the resulting datasets. Can be used without play as well but caveat emptor",scala database persistence,"http://www.playframework.com/documentation/2.1-RC2/ScalaAnorm",Recommended
+1212105176-1385121685913,neo4j,"Neo4j is a robust (fully ACID) transactional property graph database. Due to its graph data model, Neo4j is highly agile and blazing fast.",database persistence,"http://www.neo4j.org/",Recommended
+264897391-1385058559189,really-executable-jars-maven-plugin,"Maven plugin for making chmod +x jar files",maven build-tool,"https://github.com/brianm/really-executable-jars-maven-plugin",New
+1329221995-1385060037832,assertj,"Rich fluent assertion library",java jvm testing,"https://github.com/joel-costigliola/assertj-core",New
+976473569-1385060320435,jbcrypt,"jBCrypt is a Java implementation of OpenBSD's Blowfish password hashing code, as described in A Future-Adaptable Password Scheme by Niels Provos and David Mazières.",java jvm encryption,"http://www.mindrot.org/projects/jBCrypt/",New
+735386192-1385061049834,tower.js,"Small components for building apps, manipulating data, and automating a distributed infrastructure.",javascript,"http://tower.github.io/",New
+636419418-1385061281471,finatra,"Finatra is a sinatra clone for scala based on twitters finagle",scala jvm,"http://finatra.info/",New
+588686623-1385061540263,ractive.js,"Template based DOM manipulation",javascript templating,"http://www.ractivejs.org/",New
+559423498-1385062230294,scala-migrations,"Scala Migrations is a library to manage upgrades and rollbacks to database schemas.",jvm scala database persistence,"https://code.google.com/p/scala-migrations/",Recommended

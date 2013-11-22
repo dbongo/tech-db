@@ -477,13 +477,14 @@ a:active {
 }
 
 a[rel="external"]:after {
-    background-image: url('../images/external-link.png?1383054830');
+    margin-left:2px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMAQMAAABYwg+4AAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAACNJREFUCB1jYAAB+Q8QLCDAwPABiicA6flA8YYGCP4PpBkYANdYCe1BTfTHAAAAAElFTkSuQmCC');
     background-repeat: no-repeat
 }
 
 @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 20 / 10), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
     a[rel="external"]:after {
-        background-image:url('../images/external-link-24x24.png?1383054830');
+        background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMAQMAAABYwg+4AAAABlBMVEUAAAAAAAClZ7nPAAAAAXRSTlMAQObYZgAAACNJREFUCB1jYAAB+Q8QLCDAwPABiicA6flA8YYGCP4PpBkYANdYCe1BTfTHAAAAAElFTkSuQmCC');
         background-size: 12px 400px
     }
 }

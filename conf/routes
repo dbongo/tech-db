@@ -4,7 +4,6 @@
 
 GET     /                           controllers.Application.doIndex
 GET     /search                     controllers.Application.doSearch
-GET     /view/:id                   controllers.Application.viewView(id)
 GET     /tag/:tag                   controllers.Application.doTag(tag)
 GET     /add                        controllers.Application.viewAdd
 POST    /add                        controllers.Application.doAdd

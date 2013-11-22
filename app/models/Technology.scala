@@ -1,6 +1,6 @@
 package models
 
-import tasks.ES
+import data.ES
 
 
 case class Technology(
@@ -9,7 +9,10 @@ case class Technology(
   description: String,
   tags: Seq[String],
   homePage: Option[String],
-  status: String = "New") // New, Incubation, Recommended, Rejected
+  status: String = "New") { // New, Incubation, Recommended, Rejected
+
+  def withId(id: String) = copy(id = id)
+}
 
 object Technology {
 
@@ -35,5 +38,6 @@ object Technology {
     "Recommended",
     "Rejected",
     "Deprecated").map(s => s -> s)
+
 
 }

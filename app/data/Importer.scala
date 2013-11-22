@@ -2,36 +2,17 @@ package data
 
 import scala.util.parsing.combinator.RegexParsers
 import java.io.File
-import scala.io.{BufferedSource, Source}
+import scala.io.Source
 import models.Technology
-import tasks.ES
-import com.sksamuel.elastic4s.ElasticDsl._
-import ES.DefaultReaders._
-import ES.Implicits._
-import com.sksamuel.elastic4s.source.ObjectSource
-import scala.concurrent.Await
-import scala.concurrent.duration._
 
-object Exporter {
+object CSV {
 
-  def convert(technologies: List[Technology]) = {
-    val lines = technologies.map { technology =>
-      s"""${technology.id},${technology.name},"${technology.description}",${technology.tags.mkString(" ")},${technology.homePage.map("\"" + _ + "\"").getOrElse("")},${technology.status}"""
-    }
+  def from(file: File): List[Technology] = from(Source.fromFile(file))
 
-    lines.mkString("\n")
-  }
+  def from(input: Source): List[Technology] = from(input.getLines.mkString("\n"))
 
-}
-
-object Importer {
-
-  def convert(file: File): List[Technology] = convert(Source.fromFile(file))
-
-  def convert(input: Source): List[Technology] = convert(input.getLines.mkString("\n"))
-
-  def convert(input: String): List[Technology] = {
-    CSV.parse(input).flatMap {
+  def from(input: String): List[Technology] = {
+    CSVParser.parse(input).flatMap {
       case List(a,b,c,d,e,f) => Some(Technology(a,b,c,Seq(d.split(" "):_*), if(e.isEmpty) None else Some(e),f))
       case theRest => {
         println(s"For some reason we can't parse this: $theRest")
@@ -40,7 +21,15 @@ object Importer {
     }
   }
 
-  object CSV extends RegexParsers {
+  def to(technologies: List[Technology]) = {
+    val lines = technologies.map { technology =>
+      s"""${technology.id},${technology.name},"${technology.description}",${technology.tags.mkString(" ")},${technology.homePage.map("\"" + _ + "\"").getOrElse("")},${technology.status}"""
+    }
+
+    lines.mkString("\n")
+  }
+
+  object CSVParser extends RegexParsers {
     override val skipWhitespace = false   // meaningful spaces in CSV
 
     def COMMA   = ","
