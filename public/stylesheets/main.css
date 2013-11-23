@@ -2828,18 +2828,28 @@ dd.info, dd.error {
     display:none;
 }
 
-#add-form input, #add-form textarea, #add-form select {
+#technology-form input, #technology-form textarea, #technology-form select {
     font-size: 1.8rem;
     padding: 0.5rem;
 }
 
-#add-form label {
+#technology-form label {
     font-weight: bold;
 }
 
-#add-form .error input {
+#technology-form .error input, #technology-form .error textarea, #technology-form .error select {
     background: rgba(255, 0, 0, 0.1);
     border: 1px solid red;
+}
+
+#technology-form .button {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+#technology-form .button.red {
+    position:relative;
+    top:2px;
 }
 
 .actions {
@@ -2877,4 +2887,32 @@ div.technology-description p {
 
 h1.technology-name {
     font-size:4rem;
+}
+
+
+.hit-count {
+    float:right;
+}
+
+.hit-count h1 {
+    line-height:6rem;
+}
+
+#technology-list thead {
+    display:none;
+}
+
+.ellipsis {
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+
+}
+
+td.name .ellipsis {
+    max-width: 175px;
+}
+
+td.description .ellipsis {
+    max-width: 750px;
 }

@@ -3,17 +3,22 @@ package data
 import com.sksamuel.elastic4s.ElasticDsl._
 import models.Technology
 import scala.concurrent.Future
-import com.sksamuel.elastic4s.source.ObjectSource
 import com.sksamuel.elastic4s.BulkCompatibleDefinition
 import concurrent.ExecutionContext.Implicits.global
-
+import org.elasticsearch.search.SearchHit
+import java.util
+import data.ES.{SourceReader, SearchHitReader}
+import ES.Implicits._
+import org.joda.time.DateTime
+import com.sksamuel.elastic4s.source.ObjectSource
+import com.fasterxml.jackson.datatype.joda.JodaModule
+import com.fasterxml.jackson.databind.SerializationFeature
 
 object TechnologyApi {
 
-  import ES.Implicits._
-  import TechnologyReaders._
-
   private val MAX_RESULTS = 99999
+
+  configureSerialiser
 
   def all = {
     executeSearch(search in "technologies" size MAX_RESULTS)
@@ -21,6 +26,10 @@ object TechnologyApi {
 
   def single(id: String) = {
     executeGet(id from "technologies/technology")
+  }
+
+  def singleByName(name: String) = {
+    executeSearchByName(search in "technologies" bool must(field("name", name)) limit 1)
   }
 
   def query(input: String) = {
@@ -58,7 +67,27 @@ object TechnologyApi {
   }
 
   def deleteAll = {
-    executeDelete("technologies/technology")
+    executeDelete("technologies")
+  }
+
+  implicit val technologySourceReader = new SourceReader[Technology]{
+    def read(source: util.Map[String, Object]): Technology = {
+      Technology(
+        source.getAs[String]("id").get,
+        source.getAs[String]("name").get,
+        source.getAs[String]("description").get,
+        source.getAs[Seq[String]]("tags").get,
+        source.getAs[String]("homePage").flatMap(Option(_)),
+        source.getAs[String]("status").get,
+        source.getAs[DateTime]("lastModified").get
+      )
+    }
+  }
+
+  implicit val technologyHitReader = new SearchHitReader[Technology]{
+    def read(searchHit: SearchHit) : Technology = {
+      technologySourceReader.read(searchHit.getSource)
+    }
   }
 
   private def executeSearch(definition: SearchDefinition) = {
@@ -66,15 +95,17 @@ object TechnologyApi {
       .map(_.resultsAs[Technology])
       .fallbackTo(Future(List.empty))
   }
+
+  private def executeSearchByName(definition: SearchDefinition) = {
+    executeSearch(definition).map(_.headOption)
+  }
   
   private def executeIndex(definition: IndexDefinition) = {
     ES.client.execute(definition)
   }
 
   private def executeGet(definition: GetDefinition) = {
-    ES.client.get(definition)
-      .map(_.sourceAs[Technology])
-      .fallbackTo(Future(None))
+    ES.client.get(definition).map(_.sourceAs[Technology]).fallbackTo(Future(None))
   }
 
   private def executeBulk(definitions: BulkCompatibleDefinition*) = {
@@ -88,4 +119,10 @@ object TechnologyApi {
   private def executeDelete(definition: DeleteIndexDefinition) = {
     ES.client.deleteIndex(definition)
   }
+
+  private def configureSerialiser {
+    ObjectSource.mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+    ObjectSource.mapper.registerModule(new JodaModule)
+  }
+
 }

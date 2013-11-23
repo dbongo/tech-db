@@ -1,60 +1,43 @@
 @(content: Html)
-
-
-
-
-
-
-<!DOCTYPE html>
-<!--[if lt IE 9]><html class="lte-ie8" lang="en"><![endif]-->
-<!--[if gt IE 8]><!--><html lang="en"><!--<![endif]-->
-
+<!doctype html>
+<html>
 <head>
     <title>Technology Database</title>
+
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--[if lt IE 9]>
-    <script src="/customer/assets/javascripts/lib/html5.js"></script>
-    <![endif]-->
 
     <link href='@routes.Assets.at("stylesheets/main.css")' media="screen" rel="stylesheet" type="text/css">
-
 </head>
 <body>
-    <header role="banner" id="global-header">
-        <div class="header-wrapper">
-            <div class="header-global">
-                <form action="/search" method="get" accept-charset="utf-8" class="search-header search-header-2 js-search-hash" role="search">
-                    <div class="searchfield">
-                        <fieldset class="search-input">
-                            <input type="search" name="q" id="search-main">
-                        </fieldset>
-                        <fieldset class="search-submit">
-                            <button type="submit" class="button">Search</button>
-                        </fieldset>
-                    </div>
-                </form>
-                <div class="header-logo">
-                    <a href="/" title="Go to the GOV.UK homepage" id="title">
-                        <h1>Technology Database</h1>
-                    </a>
+<header role="banner" id="global-header">
+    <div class="header-wrapper">
+        <div class="header-global">
+            <form action="@routes.Query.query" method="get" accept-charset="utf-8" class="search-header search-header-2 js-search-hash" role="search">
+                <div class="searchfield">
+                    <fieldset class="search-input">
+                        <input type="search" name="q" id="search-main">
+                    </fieldset>
+                    <fieldset class="search-submit">
+                        <button type="submit" class="button">Search</button>
+                    </fieldset>
                 </div>
+            </form>
+            <div class="header-logo">
+                <a href="/" title="Go to the GOV.UK homepage" id="title">
+                    <h1>Technology Database</h1>
+                </a>
             </div>
         </div>
-    </header>
-
-    <div id="wrapper">
-        <main id="content" role="main" class="search">
-            <header class="page-header">
-
-                <h1 id="product_title"></h1>
-            </header>
-
-            @content
-        </main>
-
-
     </div>
-    </body>
+</header>
+
+<div id="wrapper">
+    <main id="content" role="main" class="search">
+        <header class="page-header"></header>
+        @content
+    </main>
+</div>
+</body>
 </html>

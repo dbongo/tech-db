@@ -4,20 +4,22 @@ import com.sksamuel.elastic4s.ElasticClient
 import org.elasticsearch.common.settings.{Settings, ImmutableSettings}
 import org.elasticsearch.search.SearchHit
 import org.elasticsearch.action.search.SearchResponse
-import models.Technology
 import collection.JavaConversions._
 import collection.JavaConverters._
-import java.util
+import java.util.{List => JavaList}
+import java.util.{Map => JavaMap}
 import org.elasticsearch.action.get.GetResponse
 import scala.util.Random
+import org.joda.time.DateTime
+import scala.reflect.ClassTag
 
 object ES {
 
-  def id = s"${math.abs(Random.nextInt)}-${System.currentTimeMillis}"
+  def id = s"${math.abs(Random.nextInt())}-${System.currentTimeMillis}"
 
   // this is here because of the names.txt not found issue in elasticsearch
   val settings = ImmutableSettings.settingsBuilder()
-    .classLoader(classOf[Settings].getClassLoader()).build()
+    .classLoader(classOf[Settings].getClassLoader).build()
 
   lazy val client = ElasticClient.remote(settings, "localhost" -> 9300)
 
@@ -26,37 +28,35 @@ object ES {
   }
 
   trait SourceReader[T] {
-    def read(source: util.Map[String, Object]): T
+    def read(source: JavaMap[String, Object]): T
   }
 
   object Implicits {
     implicit class RichSearchResponse(response: SearchResponse) {
       def resultsAs[T](implicit reader: SearchHitReader[T]): List[T] = {
-        response.getHits.hits.map(reader.read(_)).toList
+        response.getHits.hits.map(reader.read).toList
       }
     }
 
     implicit class RichGetResponse(response: GetResponse) {
       def sourceAs[T](implicit reader: SourceReader[T]): Option[T] = {
-        Option(response.getSource).map(reader.read(_))
+        Option(response.getSource).map(reader.read)
       }
     }
 
     implicit class RichSearchHit(hit: SearchHit) {
-      def sourceAs[T](key: String) = {
-        hit.getSource().getAs[T](key)
+      def sourceAs[T <: AnyRef : ClassTag](key: String) = {
+        hit.getSource.getAs[T](key)
       }
     }
 
-    implicit class RichSource(hit: util.Map[String, Object]) {
-      def getAs[T](key: String) = {
-        hit.toMap.get(key).flatMap(Option(_)).map { value =>
-          if(classOf[util.List[String]].isAssignableFrom(value.getClass)) {
-            // handle thing that can be iterated
-            value.asInstanceOf[util.List[T]].asScala.asInstanceOf[T]
-          } else {
-            value.asInstanceOf[T]
-          }
+    implicit class RichSource(hit: JavaMap[String, Object]) {
+      def getAs[T <: AnyRef : ClassTag](key: String): Option[T] = {
+        val targetClass = scala.reflect.classTag[T].runtimeClass
+        hit.toMap.get(key).flatMap(Option(_)).map {
+          case value: JavaList[_]                                => value.asScala.asInstanceOf[T]
+          case value: String if targetClass == classOf[DateTime] => DateTime.parse(value).asInstanceOf[T]
+          case value                                             => value.asInstanceOf[T]
         }
       }
     }

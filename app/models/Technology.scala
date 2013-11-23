@@ -1,15 +1,17 @@
 package models
 
 import data.ES
-
+import org.joda.time.DateTime
+import org.joda.time.format.ISODateTimeFormat
 
 case class Technology(
-  id: String,
-  name: String,
-  description: String,
-  tags: Seq[String],
-  homePage: Option[String],
-  status: String = "New") { // New, Incubation, Recommended, Rejected
+  id           : String,
+  name         : String,
+  description  : String,
+  tags         : Seq[String],
+  homePage     : Option[String],
+  status       : String = "New",
+  lastModified : DateTime = DateTime.now) {
 
   def withId(id: String) = copy(id = id)
 }
@@ -21,23 +23,32 @@ object Technology {
 
   val form = Form(
     mapping(
-      "id"          -> ignored(ES.id),
-      "name"        -> nonEmptyText,
-      "description" -> nonEmptyText,
-      "tags"        -> nonEmptyText.transform(
+      "id"           -> ignored(ES.id),
+      "name"         -> nonEmptyText,
+      "description"  -> nonEmptyText,
+      "tags"         -> nonEmptyText.transform(
         s => s.split(" ").toSeq,
         (s:Seq[String]) => s.mkString(" ")),
-      "homePage"    -> optional(text),
-      "status"      -> nonEmptyText
+      "homePage"     -> optional(text),
+      "status"       -> Status.validator,
+      "lastModified" -> ignored(DateTime.now)
     )(Technology.apply)(Technology.unapply)
   )
 
-  val statusOptions = Seq(
-    "New",
-    "Incubating",
-    "Recommended",
-    "Rejected",
-    "Deprecated").map(s => s -> s)
+  object Status {
+    val New         = "New"
+    val Incubating  = "Incubating"
+    val Recommended = "Recommended"
+    val Rejected    = "Rejected"
+    val Deprecated  = "Deprecated"
+
+    val options = Seq(New, Incubating, Recommended, Rejected, Deprecated).map(s => s -> s)
+
+    def validator = nonEmptyText.verifying { value =>
+      options.exists(status => status._1 == value)
+    }
+  }
+
 
 
 }

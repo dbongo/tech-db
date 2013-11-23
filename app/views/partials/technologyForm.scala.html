@@ -1,0 +1,24 @@
+@(action: Call, technology: Form[models.Technology])(buttons: Html)
+
+@import helper._
+
+@form(action = action, 'id -> "technology-form") {
+    @technology.globalError.map { message =>
+        <div style="margin-top:10px;font-weight:bold;padding:10px;background: rgba(255, 0, 0, 0.1);border: 1px solid red;">@message.message</div>
+    }
+
+    <div style="float:left;width:45%;margin-right:10%">
+        @inputText(technology("name"), '_label -> "Name")
+        @textarea(technology("description"), '_label -> "Description", 'rows -> 6)
+    </div>
+
+    <div style="float:left;width:45%">
+        @inputText(technology("homePage"), '_label -> "Home Page", 'type -> "url")
+        @inputText(technology("tags"), '_label -> Html("Tags <small style='font-weight:normal;'>(seperated by spaces)</small>"))
+        @select(technology("status"), options = options(models.Technology.Status.options:_*), '_label -> "Status")
+    </div>
+
+    <div style="clear:both;">
+        @buttons
+    </div>
+}

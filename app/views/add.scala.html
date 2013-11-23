@@ -9,18 +9,7 @@
             <h1>Add New Technology</h1>
         </div>
     </header>
-    @form(action = routes.Application.doAdd, 'id -> "add-form") {
-        <div style="float:left;width:45%;margin-right:10%">
-            @inputText(tech("name"), '_label -> "Name")
-            @textarea(tech("description"), '_label -> "Description", 'rows -> 6)
-        </div>
-        <div style="float:left;width:45%">
-            @inputText(tech("homePage"), '_label -> "Home Page", 'type -> "url")
-            @inputText(tech("tags"), '_label -> Html("Tags <small style='font-weight:normal;'>(seperated by spaces)</small>"))
-            @select(tech("status"), options = options(models.Technology.statusOptions:_*), '_label -> "Status")
-        </div>
-        <div style="clear:both;">
-            <input type="submit" value="&nbsp;&nbsp;&nbsp;Add New Technology&nbsp;&nbsp;&nbsp;" class="button"/>
-        </div>
+    @partials.technologyForm(routes.Technologies.performAdd, tech) {
+        <input type="submit" value="Add New Technology" class="button"/>
     }
 }

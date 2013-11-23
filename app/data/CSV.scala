@@ -4,16 +4,27 @@ import scala.util.parsing.combinator.RegexParsers
 import java.io.File
 import scala.io.Source
 import models.Technology
+import org.joda.time.DateTime
+import org.joda.time.format.ISODateTimeFormat
 
 object CSV {
 
   def from(file: File): List[Technology] = from(Source.fromFile(file))
 
-  def from(input: Source): List[Technology] = from(input.getLines.mkString("\n"))
+  def from(input: Source): List[Technology] = from(input.getLines().mkString("\n"))
 
   def from(input: String): List[Technology] = {
     CSVParser.parse(input).flatMap {
-      case List(a,b,c,d,e,f) => Some(Technology(a,b,c,Seq(d.split(" "):_*), if(e.isEmpty) None else Some(e),f))
+      case List(id, name, description, clobbedTags, maybeHomePage, status, lastModified) => {
+        Some(Technology(
+          id,
+          name,
+          description,
+          clobbedTags.split(" "),
+          if(maybeHomePage.isEmpty) None else Some(maybeHomePage),
+          status,
+          DateTime.parse(lastModified)))
+      }
       case theRest => {
         println(s"For some reason we can't parse this: $theRest")
         None
@@ -22,11 +33,16 @@ object CSV {
   }
 
   def to(technologies: List[Technology]) = {
-    val lines = technologies.map { technology =>
-      s"""${technology.id},${technology.name},"${technology.description}",${technology.tags.mkString(" ")},${technology.homePage.map("\"" + _ + "\"").getOrElse("")},${technology.status}"""
-    }
-
-    lines.mkString("\n")
+    technologies.map { technology =>
+      "%s,%s,\"%s\",%s,\"%s\",%s,%s".format(
+        technology.id,
+        technology.name,
+        technology.description,
+        technology.tags.mkString(" "),
+        technology.homePage.getOrElse(""),
+        technology.status,
+        technology.lastModified.toString(ISODateTimeFormat.dateTime()))
+    } mkString "\n"
   }
 
   object CSVParser extends RegexParsers {

@@ -2,18 +2,21 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                           controllers.Application.doIndex
-GET     /search                     controllers.Application.doSearch
-GET     /tag/:tag                   controllers.Application.doTag(tag)
-GET     /add                        controllers.Application.viewAdd
-POST    /add                        controllers.Application.doAdd
-GET     /edit/:id                   controllers.Application.viewEdit(id)
-POST    /edit/:id                   controllers.Application.doEdit(id)
-GET     /delete/:id                 controllers.Application.doDelete(id)
-GET     /status/:status             controllers.Application.doStatus(status)
-GET     /import                     controllers.Application.viewImport
-POST    /import                     controllers.Application.doImport
-GET     /export                     controllers.Application.doExport
+GET     /                           controllers.Technologies.index
+
+GET     /technology/add             controllers.Technologies.add
+POST    /technology/add             controllers.Technologies.performAdd
+GET     /technology/edit/:id        controllers.Technologies.edit(id)
+POST    /technology/edit/:id        controllers.Technologies.performEdit(id)
+GET     /technology/delete/:id      controllers.Technologies.performDelete(id)
+
+GET     /bulk/import                controllers.Bulk.in
+POST    /bulk/import                controllers.Bulk.performIn
+GET     /bulk/export                controllers.Bulk.out
+
+GET     /technology/search          controllers.Query.query
+GET     /technology/tag/:tag        controllers.Query.forTag(tag)
+GET     /technology/status/:status  controllers.Query.forStatus(status)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

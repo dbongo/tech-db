@@ -10,29 +10,16 @@
         </div>
     </header>
 
-    @form(action = routes.Application.doEdit(id), 'id -> "add-form") {
-        <div style="float:left;width:45%;margin-right:10%">
-            @inputText(tech("name"), '_label -> "Name")
-            @textarea(tech("description"), '_label -> "Description", 'rows -> 6)
-        </div>
-        <div style="float:left;width:45%">
-            @inputText(tech("homePage"), '_label -> "Home Page", 'type -> "url")
-            @inputText(tech("tags"), '_label -> Html("Tags <small style='font-weight:normal;'>(seperated by spaces)</small>"))
-            @select(tech("status"), options = options(models.Technology.statusOptions:_*), '_label -> "Status")
-        </div>
-        <div style="clear:both;">
-            <input type="submit" value="&nbsp;&nbsp;&nbsp;Edit Technology&nbsp;&nbsp;&nbsp;" class="button"/>
-            &nbsp;&nbsp;
-            <a href="@routes.Application.doDelete(id)" class="button red">&nbsp;&nbsp;&nbsp;Delete Technology&nbsp;&nbsp;&nbsp;</a>
-            <script type="text/javascript">
-                document.querySelector(".button.red").addEventListener("click", function(event){
-                    if(!confirm("This will delete this technology for good.  We cool?")) {
-                        event.preventDefault()
-                        return false;
-                    }
-                })
-            </script>
-        </div>
-
+    @partials.technologyForm(routes.Technologies.performEdit(id), tech) {
+        <input type="submit" value="Edit Technology" class="button"/>
+        <a href="@routes.Technologies.performDelete(id)" class="button red">Delete Technology</a>
+        <script type="text/javascript">
+            document.querySelector(".button.red").addEventListener("click", function(event){
+                if(!confirm("This will delete this technology for good.  We cool?")) {
+                    event.preventDefault()
+                    return false;
+                }
+            })
+        </script>
     }
 }
