@@ -2,21 +2,23 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                           controllers.Technologies.index
+GET     /                                   controllers.Technologies.index
 
-GET     /technology/add             controllers.Technologies.add
-POST    /technology/add             controllers.Technologies.performAdd
-GET     /technology/edit/:id        controllers.Technologies.edit(id)
-POST    /technology/edit/:id        controllers.Technologies.performEdit(id)
-GET     /technology/delete/:id      controllers.Technologies.performDelete(id)
+GET     /technology/add                     controllers.Technologies.add
+POST    /technology/add                     controllers.Technologies.performAdd
+GET     /technology/edit/:id                controllers.Technologies.edit(id)
+POST    /technology/edit/:id                controllers.Technologies.performEdit(id)
+GET     /technology/delete/:id              controllers.Technologies.performDelete(id)
+GET     /technology/:id/priority/:priority  controllers.Technologies.performPrioritise(id, priority: Boolean)
 
-GET     /bulk/import                controllers.Bulk.in
-POST    /bulk/import                controllers.Bulk.performIn
-GET     /bulk/export                controllers.Bulk.out
+GET     /bulk/import                        controllers.Bulk.in
+POST    /bulk/import                        controllers.Bulk.performIn
+GET     /bulk/export                        controllers.Bulk.out
 
-GET     /technology/search          controllers.Query.query
-GET     /technology/tag/:tag        controllers.Query.forTag(tag)
-GET     /technology/status/:status  controllers.Query.forStatus(status)
+GET     /technology/search                  controllers.Query.query
+GET     /technology/priority                controllers.Query.priorityOnly
+GET     /technology/tag/:tag                controllers.Query.forTag(tag)
+GET     /technology/status/:status          controllers.Query.forStatus(status)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /assets/*file                       controllers.Assets.at(path="/public", file)

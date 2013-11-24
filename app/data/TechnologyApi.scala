@@ -13,6 +13,8 @@ import org.joda.time.DateTime
 import com.sksamuel.elastic4s.source.ObjectSource
 import com.fasterxml.jackson.datatype.joda.JodaModule
 import com.fasterxml.jackson.databind.SerializationFeature
+import org.elasticsearch.search.sort.SortOrder
+import scala.Some
 
 object TechnologyApi {
 
@@ -21,7 +23,11 @@ object TechnologyApi {
   configureSerialiser
 
   def all = {
-    executeSearch(search in "technologies" size MAX_RESULTS)
+    executeSearch(search in "technologies")
+  }
+
+  def count = {
+    executeCount(countall from "technologies" types "technology")
   }
 
   def single(id: String) = {
@@ -51,7 +57,14 @@ object TechnologyApi {
   }
 
   def update(originalId: String, technology: Technology) = {
-    executeIndex(index into "technologies/technology" id originalId source ObjectSource(technology.withId(originalId)))
+    single(originalId).map(_.map(_.added)).map {
+      case Some(added) => Right(executeIndex(
+        index into "technologies/technology" id originalId source ObjectSource(
+          technology.copy(id = originalId, added = added)
+        )
+      ))
+      case _ => Left()
+    }
   }
 
   def insertMany(technologies: Seq[Technology]) = {
@@ -70,6 +83,15 @@ object TechnologyApi {
     executeDelete("technologies")
   }
 
+  def setPriority(originalId: String, priority: Boolean) = {
+    import com.sksamuel.elastic4s.ElasticDsl.{update => doUpdate} // we want to override the update DSL
+    executeUpdate(doUpdate id originalId in "technologies/technology" script s"ctx._source.priority = $priority")
+  }
+
+  def priorityOnly = {
+    executeSearch(search in "technologies" bool must(field("priority", true)))
+  }
+
   implicit val technologySourceReader = new SourceReader[Technology]{
     def read(source: util.Map[String, Object]): Technology = {
       Technology(
@@ -79,6 +101,8 @@ object TechnologyApi {
         source.getAs[Seq[String]]("tags").get,
         source.getAs[String]("homePage").flatMap(Option(_)),
         source.getAs[String]("status").get,
+        source.getAs[Boolean]("priority").get,
+        source.getAs[DateTime]("added").get,
         source.getAs[DateTime]("lastModified").get
       )
     }
@@ -91,7 +115,8 @@ object TechnologyApi {
   }
 
   private def executeSearch(definition: SearchDefinition) = {
-    ES.client.execute(definition size MAX_RESULTS)
+    // TODO Sort kinda works but not completely, investigate
+    ES.client.execute(definition size MAX_RESULTS sort(by field "name" order SortOrder.ASC))
       .map(_.resultsAs[Technology])
       .fallbackTo(Future(List.empty))
   }
@@ -101,6 +126,10 @@ object TechnologyApi {
   }
   
   private def executeIndex(definition: IndexDefinition) = {
+    ES.client.execute(definition)
+  }
+
+  private def executeUpdate(definition: UpdateDefinition) = {
     ES.client.execute(definition)
   }
 
@@ -118,6 +147,10 @@ object TechnologyApi {
 
   private def executeDelete(definition: DeleteIndexDefinition) = {
     ES.client.deleteIndex(definition)
+  }
+
+  private def executeCount(definition: CountDefinition) = {
+    ES.client.execute(definition).map(_.getCount)
   }
 
   private def configureSerialiser {

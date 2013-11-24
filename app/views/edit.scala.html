@@ -10,7 +10,15 @@
         </div>
     </header>
 
+    <div class="dates">
+        <span>Added:</span> @partials.niceDate(tech.get.added)
+        <span>Last Modified:</span> @partials.niceDate(tech.get.lastModified)
+    </div>
+
     @partials.technologyForm(routes.Technologies.performEdit(id), tech) {
+        <div>
+
+        </div>
         <input type="submit" value="Edit Technology" class="button"/>
         <a href="@routes.Technologies.performDelete(id)" class="button red">Delete Technology</a>
         <script type="text/javascript">

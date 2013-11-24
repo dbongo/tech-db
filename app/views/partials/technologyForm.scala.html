@@ -8,6 +8,7 @@
     }
 
     <div style="float:left;width:45%;margin-right:10%">
+        <input type="hidden" name="priority" value='@technology("priority").value.getOrElse(false)'/>
         @inputText(technology("name"), '_label -> "Name")
         @textarea(technology("description"), '_label -> "Description", 'rows -> 6)
     </div>

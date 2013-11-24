@@ -11,6 +11,8 @@ case class Technology(
   tags         : Seq[String],
   homePage     : Option[String],
   status       : String = "New",
+  priority     : Boolean,
+  added        : DateTime,
   lastModified : DateTime = DateTime.now) {
 
   def withId(id: String) = copy(id = id)
@@ -31,6 +33,8 @@ object Technology {
         (s:Seq[String]) => s.mkString(" ")),
       "homePage"     -> optional(text),
       "status"       -> Status.validator,
+      "priority"     -> boolean,
+      "added"        -> ignored(DateTime.now),
       "lastModified" -> ignored(DateTime.now)
     )(Technology.apply)(Technology.unapply)
   )

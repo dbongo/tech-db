@@ -51,7 +51,7 @@ object ES {
     }
 
     implicit class RichSource(hit: JavaMap[String, Object]) {
-      def getAs[T <: AnyRef : ClassTag](key: String): Option[T] = {
+      def getAs[T <: Any : ClassTag](key: String): Option[T] = {
         val targetClass = scala.reflect.classTag[T].runtimeClass
         hit.toMap.get(key).flatMap(Option(_)).map {
           case value: JavaList[_]                                => value.asScala.asInstanceOf[T]
@@ -61,6 +61,4 @@ object ES {
       }
     }
   }
-
-
 }

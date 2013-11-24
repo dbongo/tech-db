@@ -1,8 +1,8 @@
-@(hits: List[models.Technology])
+@(hits: List[models.Technology], total: Long)
 
 @main {
     <span class="hit-count">
-        <h1>@hits.size listed</h1>
+        <h1><a href="@routes.Technologies.index">@total</a> Total / <a href="@routes.Query.priorityOnly">@hits.filter(_.priority).size</a> Priority</h1>
     </span>
 
     <a href="@routes.Technologies.add" class="button" id="new-technology">New Technology</a>
@@ -21,6 +21,7 @@
            <tr>
                <td class="name">
                    <div class="ellipsis">
+
                        @technology.homePage.map { page =>
                             <a href="@page">@technology.name</a>
                        }.getOrElse {
@@ -29,6 +30,7 @@
                    </div>
                </td>
                <td class="description">
+
                    <div class="tag-holder">
                        @defining(technology.status.toLowerCase) { status =>
                             <span class="tag status @status">
@@ -43,6 +45,9 @@
                        }
                    </div>
                    <div class="ellipsis">
+                       <a href="#" class="priority-link" data-priority="@technology.priority" data-id="@technology.id">
+                           @if(technology.priority) { ★ } else { ☆ }
+                       </a>
                        @technology.description
                    </div>
                </td>
@@ -52,4 +57,28 @@
            </tr>
         }
     </table>
+    <script type="text/javascript">
+        document.querySelector("#technology-list").addEventListener("click", function(event){
+            var target = event.target
+
+            if(target.classList.contains("priority-link")){
+
+                var priority = JSON.parse(target.getAttribute("data-priority"));
+                var newPriority = JSON.stringify(!priority);
+                var id = target.getAttribute("data-id");
+
+                var ajax = new XMLHttpRequest();
+                ajax.open("GET", "/technology/" + id + "/priority/" + newPriority);
+                ajax.onreadystatechange = function() {
+                    if (ajax.readyState === 4 && ajax.status === 200) {
+                        target.innerHTML = priority ? "☆" : "★";
+                        target.setAttribute("data-priority", newPriority);
+                    }
+                };
+                ajax.send();
+
+                event.preventDefault()
+            }
+        })
+    </script>
 }

@@ -2,10 +2,8 @@ package tasks
 
 import play.core.StaticApplication
 import scala.io.Source
-import data.{TechnologyApi, CSV}
+import data.{ES, TechnologyApi, CSV}
 import TechnologyApi._
-import scala.concurrent.Await
-import scala.concurrent.duration.Duration._
 
 trait PlayTask extends Runnable {
   val application = new StaticApplication(new java.io.File("."))
@@ -33,5 +31,24 @@ class ResetDB extends Runnable {
 class SeedDB extends Runnable {
   def run() {
     insertMany(CSV.from(Source.fromFile("./data/seed.csv")))
+  }
+}
+
+class Prioritize extends Runnable {
+  def run() {
+
+    import com.sksamuel.elastic4s.ElasticDsl._
+    import concurrent.ExecutionContext.Implicits.global
+
+    TechnologyApi.all.map { technologies =>
+      println(technologies)
+      ES.client.bulk(
+        technologies
+          .map(_.id)
+          .map(
+            update id _ in "technologies/technology" script "ctx._source.priority = false"
+          ):_*
+        )
+    }
   }
 }

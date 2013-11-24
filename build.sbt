@@ -2,7 +2,7 @@ import se.yobriefca.SbtTasks._
 
 name := "tech-db"
 
-version := "0.1.0"
+version := "0.2.0"
 
 libraryDependencies ++= Seq(
   "org.elasticsearch" % "elasticsearch" % "0.90.6",
@@ -13,5 +13,7 @@ libraryDependencies ++= Seq(
 installTask("seedDB", "seeds the database")
 
 installTask("resetDB", "resets the database")
+
+installTask("prioritize", "Runs a migration")
 
 play.Project.playScalaSettings

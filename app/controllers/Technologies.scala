@@ -5,12 +5,14 @@ import concurrent.ExecutionContext.Implicits.global
 import models.Technology
 import scala.concurrent.Future
 import data._
+import org.joda.time.DateTime
+import play.api.libs.json.Json
 
 object Technologies extends Controller with HomingPigeonPowers {
 
   def index = Action.async {
     TechnologyApi.all.map { response =>
-        Ok(views.html.index(response))
+        Ok(views.html.index(response, response.size))
       }
   }
 
@@ -44,6 +46,11 @@ object Technologies extends Controller with HomingPigeonPowers {
 
   def performDelete(id: String) = Action.async {
     TechnologyApi.delete(id).map(flyHome)
+  }
+
+  def performPrioritise(id: String, priority: Boolean) = Action.async {
+    TechnologyApi.setPriority(id, priority)
+      .map(_ => Ok(Json.obj("success" -> true)))
   }
 }
 

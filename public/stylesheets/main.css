@@ -2857,7 +2857,7 @@ dd.info, dd.error {
     text-align:center;
     vertical-align: middle;
 }
-.edit-link {
+.edit-link, .priority-link {
     color: #999!important;
     font-size:3rem!important;
     border:0;
@@ -2868,10 +2868,18 @@ dd.info, dd.error {
 
 }
 
+td.description a.priority-link {
+    font-size:2rem!important;
+    float:left;
+}
+
 .edit-link:hover {
     color: #333!important;
 }
 
+td.name {
+    width:175px;
+}
 td.name a {
     font-size:1.6rem!important;
 }
@@ -2898,6 +2906,10 @@ h1.technology-name {
     line-height:6rem;
 }
 
+.hit-count h1 a {
+    font-size: 3.3rem!important;
+}
+
 #technology-list thead {
     display:none;
 }
@@ -2913,6 +2925,19 @@ td.name .ellipsis {
     max-width: 175px;
 }
 
+td.description {
+    padding-left:0;
+}
 td.description .ellipsis {
     max-width: 750px;
+    line-height: 2.5rem;
+}
+
+.dates span {
+    font-weight: bold;
+    margin-right: 2px;
+}
+
+.dates span:nth-child(2) {
+    margin-left: 15px;
 }

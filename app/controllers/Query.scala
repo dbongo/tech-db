@@ -8,26 +8,36 @@ import concurrent.ExecutionContext.Implicits.global
 object Query extends Controller with HomingPigeonPowers {
 
   def query = Action.async { request =>
-    request.getQueryString("q").flatMap { case q if !q.trim.isEmpty =>
-      Some {
-        TechnologyApi.query(q).map { results =>
-          Ok(views.html.index(results))
-        }
+    request.getQueryString("q")
+      .collect({ case q if !q.trim.isEmpty => q })
+      .map { q =>
+        for(
+          count   <- TechnologyApi.count;
+          results <- TechnologyApi.query(q)
+        ) yield Ok(views.html.index(results, count))
+      } getOrElse {
+        Future(flyHome())
       }
-    } getOrElse {
-      Future(flyHome())
-    }
   }
 
   def forTag(tag: String) = Action.async {
-    TechnologyApi.forTag(tag).map { results =>
-      Ok(views.html.index(results))
-    }
+    for(
+      count   <- TechnologyApi.count;
+      results <- TechnologyApi.forTag(tag)
+    ) yield Ok(views.html.index(results, count))
   }
 
   def forStatus(status: String) = Action.async {
-    TechnologyApi.forStatus(status).map { results =>
-      Ok(views.html.index(results))
-    }
+    for(
+      count   <- TechnologyApi.count;
+      results <- TechnologyApi.forStatus(status)
+    ) yield Ok(views.html.index(results, count))
+  }
+
+  def priorityOnly = Action.async {
+    for(
+      count   <- TechnologyApi.count;
+      results <- TechnologyApi.priorityOnly
+    ) yield Ok(views.html.index(results, count))
   }
 }
