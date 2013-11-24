@@ -2,7 +2,10 @@
 
 @main {
     <span class="hit-count">
-        <h1><a href="@routes.Technologies.index">@total</a> Total / <a href="@routes.Query.priorityOnly">@hits.filter(_.priority).size</a> Priority</h1>
+        <h1>
+            <a href="@routes.Technologies.index">@total</a> Total /
+            <a href="@routes.Query.priorityOnly">@hits.filter(_.priority).size</a> Priority
+        </h1>
     </span>
 
     <a href="@routes.Technologies.add" class="button" id="new-technology">New Technology</a>
