@@ -1,6 +1,7 @@
 @(hits: List[models.Technology], total: Long)
 
 @main {
+
     <span class="hit-count">
         <h1>
             <a href="@routes.Technologies.index">@total</a> Total /
@@ -21,7 +22,7 @@
             </tr>
         </thead>
         @hits.map { technology =>
-           <tr>
+           <tr class='@("archived".when(technology.archived))'>
                <td class="name">
                    <div class="ellipsis">
 

@@ -15,7 +15,7 @@ object CSV {
 
   def from(input: String): List[Technology] = {
     CSVParser.parse(input).flatMap {
-      case List(id, name, description, clobbedTags, maybeHomePage, status, priority, added, lastModified) => {
+      case List(id, name, description, clobbedTags, maybeHomePage, status, priority, archived, added, lastModified) => {
         Some(Technology(
           id,
           name,
@@ -24,6 +24,7 @@ object CSV {
           if(maybeHomePage.isEmpty) None else Some(maybeHomePage),
           status,
           priority.toBoolean,
+          archived.toBoolean,
           DateTime.parse(added),
           DateTime.parse(lastModified)))
       }
@@ -36,7 +37,7 @@ object CSV {
 
   def to(technologies: List[Technology]) = {
     technologies.map { technology =>
-      "%s,%s,\"%s\",%s,\"%s\",%s,%s,%s,%s".format(
+      "%s,%s,\"%s\",%s,\"%s\",%s,%s,%s,%s,%s".format(
         technology.id,
         technology.name,
         technology.description,
@@ -44,6 +45,7 @@ object CSV {
         technology.homePage.getOrElse(""),
         technology.status,
         technology.priority,
+        technology.archived,
         technology.added.toString(ISODateTimeFormat.dateTime()),
         technology.lastModified.toString(ISODateTimeFormat.dateTime()))
     } mkString "\n"

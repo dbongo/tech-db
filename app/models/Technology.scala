@@ -12,6 +12,7 @@ case class Technology(
   homePage     : Option[String],
   status       : String = "New",
   priority     : Boolean,
+  archived     : Boolean,
   added        : DateTime,
   lastModified : DateTime = DateTime.now) {
 
@@ -34,6 +35,7 @@ object Technology {
       "homePage"     -> optional(text),
       "status"       -> Status.validator,
       "priority"     -> boolean,
+      "archived"     -> boolean,
       "added"        -> ignored(DateTime.now),
       "lastModified" -> ignored(DateTime.now)
     )(Technology.apply)(Technology.unapply)

@@ -20,14 +20,14 @@ object TechnologyApi {
 
   private val MAX_RESULTS = 99999
 
-  configureSerialiser
+  configureSerialiser()
 
-  def all = {
-    executeSearch(search in "technologies")
+  def all(includeArchived: Boolean = true) = {
+    executeSearch(search in "technologies", includeArchived)
   }
 
-  def count = {
-    executeCount(countall from "technologies" types "technology")
+  def count(includeArchived: Boolean = true) = {
+    executeCount(countall from "technologies" types "technology", includeArchived)
   }
 
   def single(id: String) = {
@@ -40,15 +40,15 @@ object TechnologyApi {
 
   def query(input: String) = {
     val terms = input.split(" ").map(term("_all", _))
-    executeSearch(search in "technologies" bool must(terms:_*))
+    executeSearch(search in "technologies" bool must(terms:_*), includeArchived = true)
   }
 
   def forTag(tag: String) = {
-    executeSearch(search in "technologies" filter termFilter("tags", tag))
+    executeSearch(search in "technologies" filter termFilter("tags", tag), includeArchived = true)
   }
 
   def forStatus(status: String) = {
-    executeSearch(search in "technologies" bool must(term("status", status)))
+    executeSearch(search in "technologies" bool must(term("status", status)), includeArchived = true)
   }
 
   def insert(technology: Technology) = {
@@ -88,8 +88,21 @@ object TechnologyApi {
     executeUpdate(doUpdate id originalId in "technologies/technology" script s"ctx._source.priority = $priority")
   }
 
+  def archive(id: String) = {
+    setArchive(id, archived = true)
+  }
+
+  def unarchive(id: String) = {
+    setArchive(id, archived = false)
+  }
+
+  def setArchive(originalId: String, archived: Boolean) = {
+    import com.sksamuel.elastic4s.ElasticDsl.{update => doUpdate} // we want to override the update DSL
+    executeUpdate(doUpdate id originalId in "technologies/technology" script s"ctx._source.archived = $archived")
+  }
+
   def priorityOnly = {
-    executeSearch(search in "technologies" bool must(field("priority", true)))
+    executeSearch(search in "technologies" bool must(field("priority", true)), includeArchived = true)
   }
 
   implicit val technologySourceReader = new SourceReader[Technology]{
@@ -102,6 +115,7 @@ object TechnologyApi {
         source.getAs[String]("homePage").flatMap(Option(_)),
         source.getAs[String]("status").get,
         source.getAs[Boolean]("priority").get,
+        source.getAs[Boolean]("archived").get,
         source.getAs[DateTime]("added").get,
         source.getAs[DateTime]("lastModified").get
       )
@@ -114,15 +128,21 @@ object TechnologyApi {
     }
   }
 
-  private def executeSearch(definition: SearchDefinition) = {
-    // TODO Sort kinda works but not completely, investigate
-    ES.client.execute(definition size MAX_RESULTS sort(by field "name" order SortOrder.ASC))
+  private def executeSearch(definition: SearchDefinition, includeArchived: Boolean) = {
+    val filteredDefinition = onlyIf[SearchDefinition](
+      !includeArchived,
+      // [review] - Sort kinda works but not completely
+      definition size MAX_RESULTS sort(by field "name" order SortOrder.ASC),
+      _ filter termFilter("archived", includeArchived))
+
+    ES.client.execute(filteredDefinition)
       .map(_.resultsAs[Technology])
+      // [fix] - this masks mapping errors but handles the case where index does not exist and error is thrown.
       .fallbackTo(Future(List.empty))
   }
 
   private def executeSearchByName(definition: SearchDefinition) = {
-    executeSearch(definition).map(_.headOption)
+    executeSearch(definition, includeArchived = true).map(_.headOption)
   }
   
   private def executeIndex(definition: IndexDefinition) = {
@@ -149,13 +169,25 @@ object TechnologyApi {
     ES.client.deleteIndex(definition)
   }
 
-  private def executeCount(definition: CountDefinition) = {
-    ES.client.execute(definition).map(_.getCount)
+  private def executeCount(definition: CountDefinition, includeArchived: Boolean) = {
+    val filteredDefinition = onlyIf[CountDefinition](
+      !includeArchived,
+      definition,
+      _.query(term("archived", false)))
+
+    ES.client.execute(filteredDefinition).map(_.getCount)
   }
 
-  private def configureSerialiser {
+  private def configureSerialiser() {
     ObjectSource.mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
     ObjectSource.mapper.registerModule(new JodaModule)
+  }
+
+
+  private def onlyIf[T](trigger: Boolean, target: T, action: T => T) = if(trigger) {
+    action(target)
+  } else {
+   target
   }
 
 }

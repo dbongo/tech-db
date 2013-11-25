@@ -4,22 +4,23 @@
 
 @form(action = action, 'id -> "technology-form") {
     @technology.globalError.map { message =>
-        <div style="margin-top:10px;font-weight:bold;padding:10px;background: rgba(255, 0, 0, 0.1);border: 1px solid red;">@message.message</div>
+        <div class="error-message">@message.message</div>
     }
 
-    <div style="float:left;width:45%;margin-right:10%">
+    <div class="column-of-two">
         <input type="hidden" name="priority" value='@technology("priority").value.getOrElse(false)'/>
+        <input type="hidden" name="archived" value='@technology("archived").value.getOrElse(false)'/>
         @inputText(technology("name"), '_label -> "Name")
         @textarea(technology("description"), '_label -> "Description", 'rows -> 6)
     </div>
 
-    <div style="float:left;width:45%">
+    <div class="column-of-two">
         @inputText(technology("homePage"), '_label -> "Home Page", 'type -> "url")
         @inputText(technology("tags"), '_label -> Html("Tags <small style='font-weight:normal;'>(seperated by spaces)</small>"))
         @select(technology("status"), options = options(models.Technology.Status.options:_*), '_label -> "Status")
     </div>
 
-    <div style="clear:both;">
+    <div class="clear">
         @buttons
     </div>
 }

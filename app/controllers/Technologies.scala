@@ -11,7 +11,7 @@ import play.api.libs.json.Json
 object Technologies extends Controller with HomingPigeonPowers {
 
   def index = Action.async {
-    TechnologyApi.all.map { response =>
+    TechnologyApi.all().map { response =>
         Ok(views.html.index(response, response.size))
       }
   }
@@ -51,6 +51,14 @@ object Technologies extends Controller with HomingPigeonPowers {
   def performPrioritise(id: String, priority: Boolean) = Action.async {
     TechnologyApi.setPriority(id, priority)
       .map(_ => Ok(Json.obj("success" -> true)))
+  }
+
+  def performArchive(id: String) = Action.async {
+    TechnologyApi.archive(id).map(flyHome)
+  }
+
+  def performUnarchive(id: String) = Action.async {
+    TechnologyApi.unarchive(id).map(flyHome)
   }
 }
 

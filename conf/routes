@@ -10,6 +10,8 @@ GET     /technology/edit/:id                controllers.Technologies.edit(id)
 POST    /technology/edit/:id                controllers.Technologies.performEdit(id)
 GET     /technology/delete/:id              controllers.Technologies.performDelete(id)
 GET     /technology/:id/priority/:priority  controllers.Technologies.performPrioritise(id, priority: Boolean)
+GET     /technology/archive/:id             controllers.Technologies.performArchive(id)
+GET     /technology/unarchive/:id           controllers.Technologies.performUnarchive(id)
 
 GET     /bulk/import                        controllers.Bulk.in
 POST    /bulk/import                        controllers.Bulk.performIn

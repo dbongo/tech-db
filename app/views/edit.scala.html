@@ -16,10 +16,12 @@
     </div>
 
     @partials.technologyForm(routes.Technologies.performEdit(id), tech) {
-        <div>
-
-        </div>
         <input type="submit" value="Edit Technology" class="button"/>
+        @if(tech.get.archived) {
+            <a href="@routes.Technologies.performUnarchive(id)" class="button gray">Unarchive Technology</a>
+        } else {
+            <a href="@routes.Technologies.performArchive(id)" class="button gray">Archive Technology</a>
+        }
         <a href="@routes.Technologies.performDelete(id)" class="button red">Delete Technology</a>
         <script type="text/javascript">
             document.querySelector(".button.red").addEventListener("click", function(event){

@@ -2847,7 +2847,7 @@ dd.info, dd.error {
     padding-right: 20px;
 }
 
-#technology-form .button.red {
+#technology-form .button.red, #technology-form .button.gray {
     position:relative;
     top:2px;
 }
@@ -2856,7 +2856,9 @@ dd.info, dd.error {
     padding: 0;
     text-align:center;
     vertical-align: middle;
+    white-space: nowrap;
 }
+
 .edit-link, .priority-link {
     color: #999!important;
     font-size:3rem!important;
@@ -2877,15 +2879,17 @@ td.description a.priority-link {
     color: #333!important;
 }
 
-td.name {
-    width:175px;
-}
+
 td.name a {
     font-size:1.6rem!important;
 }
 
 .button.red {
     background-color: #a20000;
+}
+
+.button.gray {
+    background-color: #5b5b5d;
 }
 
 div.technology-description p {
@@ -2940,4 +2944,29 @@ td.description .ellipsis {
 
 .dates span:nth-child(2) {
     margin-left: 15px;
+}
+
+.error-message {
+    margin-top:10px;
+    font-weight:bold;
+    padding:10px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid red;
+}
+
+.column-of-two {
+    float:left;
+    width:45%;
+}
+
+.column-of-two:nth-child(1) {
+    margin-right:10%
+}
+
+.clear {
+    clear:both;
+}
+
+tr.archived {
+    opacity:0.3;
 }

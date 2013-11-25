@@ -21,7 +21,7 @@ object Bulk extends Controller with HomingPigeonPowers {
   }
 
   def out = Action.async {
-    TechnologyApi.all.map { technologies =>
+    TechnologyApi.all().map { technologies =>
 
       val export = CSV.to(technologies)
       val temp = File.createTempFile(s"export-${System.currentTimeMillis}", ".csv")
