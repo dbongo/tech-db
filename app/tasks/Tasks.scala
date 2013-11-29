@@ -28,28 +28,9 @@ class ResetDB extends Runnable {
   }
 }
 
-
 class SeedDB extends Runnable {
   def run() {
     insertMany(CSV.from(Source.fromFile("./data/seed.csv")))
   }
 }
 
-class AddArchiveAttribute extends Runnable {
-  def run() {
-
-    import com.sksamuel.elastic4s.ElasticDsl._
-    import concurrent.ExecutionContext.Implicits.global
-    import collection.JavaConversions._
-
-    ES.client.execute(search in "technologies" types "technology" size 9999).map { response =>
-      ES.client.bulk(
-        response.getHits.map(_.getId)
-          .toList
-          .map(
-            update id _ in "technologies/technology" script "ctx._source.archived = false"
-          ):_*
-      )
-    }
-  }
-}

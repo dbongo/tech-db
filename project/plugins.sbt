@@ -6,4 +6,4 @@ resolvers += "yobriefca.se-repo" at "http://yobriefca.se/maven"
 
 addSbtPlugin("com.typesafe.play" % "sbt-plugin" % "2.2.1")
 
-addSbtPlugin("se.yobriefca" % "sbt-tasks" % "0.3.6")
+addSbtPlugin("se.yobriefca" % "sbt-tasks" % "0.3.16")

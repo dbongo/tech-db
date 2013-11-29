@@ -14,6 +14,4 @@ installTask("seedDB", "seeds the database")
 
 installTask("resetDB", "resets the database")
 
-installTask("addArchiveAttribute", "Runs a migration")
-
 play.Project.playScalaSettings
