@@ -22,10 +22,9 @@
             </tr>
         </thead>
         @hits.map { technology =>
-           <tr class='@("archived".when(technology.archived))'>
+           <tr class='technology @("archived".when(technology.archived)) @technology.status.toLowerCase'>
                <td class="name">
                    <div class="ellipsis">
-
                        @technology.homePage.map { page =>
                             <a href="@page">@technology.name</a>
                        }.getOrElse {
@@ -34,14 +33,12 @@
                    </div>
                </td>
                <td class="description">
-
                    <div class="tag-holder">
                        @defining(technology.status.toLowerCase) { status =>
                             <span class="tag status @status">
                                 <a href='@routes.Query.forStatus(status)'>@status</a>
                             </span>
                        }
-
                        @technology.tags.map { tag =>
                            <span class="tag">
                                <a href='@routes.Query.forTag(tag)'>@tag</a>

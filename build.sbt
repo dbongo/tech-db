@@ -2,7 +2,7 @@ import se.yobriefca.SbtTasks._
 
 name := "tech-db"
 
-version := "0.3.0"
+version := "0.4.0"
 
 libraryDependencies ++= Seq(
   "org.elasticsearch" % "elasticsearch" % "0.90.6",

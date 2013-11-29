@@ -2860,7 +2860,7 @@ dd.info, dd.error {
 }
 
 .edit-link, .priority-link {
-    color: #999!important;
+    color: #999;
     font-size:3rem!important;
     border:0;
     margin:0;
@@ -2970,3 +2970,55 @@ td.description .ellipsis {
 tr.archived {
     opacity:0.3;
 }
+
+/*
+tr.technology.new td, tr.technology.new td a {
+    background-color: #f0f8fa;
+    color: #16365C;
+}
+
+tr.technology.new td.description .tag-holder .tag a {
+    color: #f0f8fa;
+    background-color: #16365C;
+}
+
+tr.technology.incubating td,tr.technology.incubating td a {
+    background-color: #ffffcc;
+    color: #E26B0A;
+}
+
+tr.technology.incubating td.description .tag-holder .tag a  {
+    color: #ffffcc;
+    background-color: #E26B0A;
+}
+
+tr.technology.recommended td,tr.technology.recommended td a {
+    background-color: #92d050;
+    color: #4F6228;
+}
+
+tr.technology.recommended td.description .tag-holder .tag a{
+    color: #92d050;
+    background-color: #4F6228;
+}
+
+tr.technology.rejected td,tr.technology.rejected td a {
+    background-color: #ff7c80;
+    color: #C00000;
+}
+
+tr.technology.rejected td.description .tag-holder .tag a {
+    color: #ff7c80;
+    background-color: #C00000;
+}
+
+tr.technology.deprecated td, tr.technology.deprecated td a {
+    background-color: #595959;
+    color: #fff;
+}
+
+tr.technology.deprecated td.description .tag-holder .tag a {
+    color: #595959;
+    background-color: #fff;
+}
+*/
