@@ -9,6 +9,7 @@
 122689819-1385060744434,component-ness-pg,"Embedded Postgres library useful for testing and whatnot",java jvm database testing,"https://github.com/NessComputing/components-ness-pg",New,false,false,2013-11-22T20:29:03.330Z,2013-11-22T20:29:03.317Z
 1121085032-1385060106462,config,"Configuration library",java jvm scala,"https://github.com/typesafehub/config",New,false,false,2013-11-22T20:29:03.321Z,2013-11-22T20:29:03.317Z
 1294143686-1385060171066,jackson-dataformat-yaml,"YAML extension for Jackson",java jvm,"https://github.com/FasterXML/jackson-dataformat-yaml",New,false,false,2013-11-22T20:29:03.340Z,2013-11-22T20:29:03.317Z
+1969139100-1386351188977,dimple.js,"Dimple is an object-oriented API for business analytics powered by d3.",javascript graphing charting,"http://dimplejs.org/",New,false,false,2013-12-06T17:32:34.927Z,2013-12-06T17:32:34.927Z
 712959958-1385727789520,dnsyo,"Check your DNS against over 1500 global DNS servers
 
 DNSYO is a little tool I built to help me keep track of DNS propagation.
@@ -85,6 +86,7 @@ Undertow is designed to be fully embeddable, with easy to use fluent builder API
 Undertow is sponsored by JBoss and is the default web server in the Wildfly Application Server.",java jvm web,"http://undertow.io/",New,false,false,2013-11-29T11:55:37.731Z,2013-11-29T11:55:37.731Z
 901565294-1385060143057,unix4j,"Unix commands for Java including grep and what not",java jvm,"https://code.google.com/p/unix4j/",New,false,false,2013-11-22T20:29:03.340Z,2013-11-22T20:29:03.317Z
 865303208-1385060814407,vtte,"Very Trivial Templating Engine",java jvm templating,"https://github.com/hgschmie/vtte",New,false,false,2013-11-22T20:29:03.330Z,2013-11-22T20:29:03.317Z
+1086174164-1385737952454,waitress,"A lean JS library that makes waiting on a collection of async calls less painful",javascript,"https://github.com/Zinssmeister/waitress.js",New,false,false,2013-11-29T15:12:11.012Z,2013-11-29T15:12:11.012Z
 566418107-1385726180391,wraith," A responsive screenshot comparison tool",testing,"https://github.com/BBC-News/wraith",New,false,false,2013-11-29T11:55:37.731Z,2013-11-29T11:55:37.731Z
 328920127-1385060603426,xstream,"Super fast XML streaming and parsing.  Used by NASA in space FFS",java jvm xml,"http://xstream.codehaus.org/",New,false,false,2013-11-22T20:29:03.320Z,2013-11-22T20:29:03.317Z
 517062633-1385058335321,zt-zip,"ZIP file library featuring iteration and extraction",compression jvm,"https://github.com/zeroturnaround/zt-zip",New,false,false,2013-11-22T20:29:03.319Z,2013-11-22T20:29:03.317Z
